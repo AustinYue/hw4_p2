@@ -1,0 +1,50 @@
+---
+title: "p8105_hw4_ly2428"
+author: "Leiyu Yue"
+date: "10/25/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+#
+pol <- read_csv("pols-month.csv") %>% 
+  clean_names() %>% 
+  mutate(mon = as.Date(mon, format = "%Y - %m - %d") ) %>% 
+  mutate(month = lubridate::floor_date((mon), unit = "month"))
+#
+gdp <- read_csv("GDP.csv") %>% 
+  clean_names() %>% 
+  mutate(date = as.Date(date, format = "%Y - %m - %d")) %>% 
+  mutate(month = lubridate::floor_date((date), unit = "month"))
+#
+#
+data <- left_join(pol, gdp, by = "month")
+```
+
+
+#
+pol <- read_csv("./data/pols-month.csv") %>% 
+  mutate(date = mon) %>% 
+  select(-mon) %>%
+  select(date, everything()) %>% 
+  mutate(date = as.Date(date, format = "%Y-%m-%d")) %>% 
+  mutate(month = lubridate::floor_date(date), unit = "month")
+#
+gdp <- read_csv("./data/GDP.csv") %>% 
+  clean_names() %>% 
+  mutate(value = as.numeric(value)) %>% 
+  mutate(date = as.Date(date, format = "%Y-%m-%d"))
+#
+#
+data <- left_join(pol, gdp, by = "date")
+
+

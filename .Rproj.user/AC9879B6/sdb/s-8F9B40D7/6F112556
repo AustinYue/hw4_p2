@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"p8105_hw4_ly2428\"\nauthor: \"Leiyu Yue\"\ndate: \"10/25/2017\"\noutput: html_document\n---\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n```\n\n```{r}\nlibrary(tidyverse)\nlibrary(janitor)\n```\n\n```{r}\n#\npol <- read_csv(\"pols-month.csv\") %>% \n  clean_names() %>% \n  mutate(mon = as.Date(mon, format = \"%Y - %m - %d\") ) %>% \n  mutate(month = lubridate::floor_date((mon), unit = \"month\"))\n#\ngdp <- read_csv(\"GDP.csv\") %>% \n  clean_names() %>% \n  mutate(date = as.Date(date, format = \"%Y - %m - %d\")) %>% \n  mutate(month = lubridate::floor_date((date), unit = \"month\"))\n#\n#\ndata <- left_join(pol, gdp, by = \"month\")\n```\n\n\n#\npol <- read_csv(\"./data/pols-month.csv\") %>% \n  mutate(date = mon) %>% \n  select(-mon) %>%\n  select(date, everything()) %>% \n  mutate(date = as.Date(date, format = \"%Y-%m-%d\")) %>% \n  mutate(month = lubridate::floor_date(date), unit = \"month\")\n#\ngdp <- read_csv(\"./data/GDP.csv\") %>% \n  clean_names() %>% \n  mutate(value = as.numeric(value)) %>% \n  mutate(date = as.Date(date, format = \"%Y-%m-%d\"))\n#\n#\ndata <- left_join(pol, gdp, by = \"date\")\n\n\n",
+    "created" : 1508989804649.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1124058377",
+    "id" : "6F112556",
+    "lastKnownWriteTime" : 1508991203,
+    "last_content_update" : 1508991203074,
+    "path" : "~/Documents/School/DSI/hw4/hw4_p2.Rmd",
+    "project_path" : "hw4_p2.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
