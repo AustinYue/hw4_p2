@@ -30,6 +30,15 @@ gdp <- read_csv("GDP.csv") %>%
 data <- left_join(pol, gdp, by = "month")
 ```
 
+```{r}
+# GDP over time, party of the president
+data %>% 
+  ggplot(aes(x = date, y = value, group = prez_dem, color = prez_dem))+
+  geom_smooth()
+
+# there is something wrong with the y-axis
+```
+
 
 #
 pol <- read_csv("./data/pols-month.csv") %>% 
