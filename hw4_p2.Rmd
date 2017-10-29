@@ -30,4 +30,16 @@ gdp <- read_csv("GDP.csv") %>%
 data <- left_join(pol, gdp, by = "month")
 ```
 
+```{r}
+## Making plots
+data %>% 
+  mutate(value = as.numeric(value)) %>% 
+  mutate(prez_dem = recode(prez_dem, "0" = "republican", "1" = "democratic")) %>% 
+  drop_na() %>% 
+  ggplot(aes(x = month, y = value, color = prez_dem)) +
+  geom_bar(stat = "identity", fill = "white") 
+```
+  
+**Comment:** The overall trend of GDP is increasing before 1980 and is decreasing after 1980. The two parties democratic party and republican took controlled in turns. Both the highest GDP value and the lowest GDP value are in democratic part's rulling period.
+
 
